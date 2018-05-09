@@ -152,13 +152,13 @@ function parse(input) {
 
     function parse_atom() {
         return maybe_call(function() {
-            // 可以去掉
-            // if (is_punc("(")) {
-            //     input.next();
-            //     var exp = parse_expression();
-            //     skip_punc(")");
-            //     return exp;
-            // }
+            // 不可以去掉，用于解析if或者其他{}体内的 ()
+            if (is_punc("(")) {
+                input.next();
+                var exp = parse_expression();
+                skip_punc(")");
+                return exp;
+            }
             if (is_punc("{")) return parse_prog();
             if (is_kw("if")) return parse_if();
             if (is_kw("true") || is_kw("false")) return parse_bool();
