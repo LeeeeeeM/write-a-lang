@@ -22,7 +22,7 @@ Environment.prototype = {
     get: function(key) {
         var scope = this.lookup(key);
         if (scope) {
-            return scope[key];
+            return scope.vars[key];
         }
         throw new Error('Undefined variable' + name);
     },
@@ -63,6 +63,7 @@ function evaluate(exp, env) {
             return exp.else ? evaluate(exp.else, env) : false;
 
         case 'call':
+            // console.log(exp.func, env)
             var fn = evaluate(exp.func, env);
             return fn.apply(null, exp.args.map(function(arg) {
                 return evaluate(arg, env);
