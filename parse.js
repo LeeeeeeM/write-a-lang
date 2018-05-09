@@ -152,12 +152,13 @@ function parse(input) {
 
     function parse_atom() {
         return maybe_call(function() {
-            if (is_punc("(")) {
-                input.next();
-                var exp = parse_expression();
-                skip_punc(")");
-                return exp;
-            }
+            // 可以去掉
+            // if (is_punc("(")) {
+            //     input.next();
+            //     var exp = parse_expression();
+            //     skip_punc(")");
+            //     return exp;
+            // }
             if (is_punc("{")) return parse_prog();
             if (is_kw("if")) return parse_if();
             if (is_kw("true") || is_kw("false")) return parse_bool();
@@ -192,6 +193,10 @@ function parse(input) {
     function parse_expression() {
         // console.log(n++);
         return maybe_call(function() {
+
+
+            // var a = parse_atom();
+            // console.log(a);
             return maybe_binary(parse_atom(), 0);
         });
     }
