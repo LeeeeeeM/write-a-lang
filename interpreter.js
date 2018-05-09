@@ -95,7 +95,8 @@ function make_lambda(exp, env) {
 
 function apply_op(op, a, b) {
     function num(x) {
-        if (typeof x !== 'number') {
+        if (typeof x !== 'number' || x !== x) {
+            // NaN typeof NaN === 'number'
             throw new Error('expected number but got' + x);
         }
         return x;
