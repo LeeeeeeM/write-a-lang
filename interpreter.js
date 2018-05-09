@@ -17,7 +17,7 @@ Environment.prototype = {
             }
             scope = scope.parent;
         }
-        throw new Error('no such vars')
+        throw new Error('no such vars ' + key)
     },
     get: function(key) {
         var scope = this.lookup(key);

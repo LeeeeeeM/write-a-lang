@@ -15,16 +15,20 @@ sum = lambda(a, b) {
 
 #hahahah
 
-#string = "xxxxx        \\\\\\\\\'       ";
-
+string = "xxxxx        \\\\\\\\\'       ";
+print(string);
 
 print(sum(1, 2));
-
 
 `;
 var bbb = InputStream(a);
 
 var ccc = TokenStream(bbb);
+
+
+/*
+* 测试tokenstream
+*/
 
 // function con() {
 //   var temp;
@@ -34,17 +38,25 @@ var ccc = TokenStream(bbb);
 //     }
 //   }
 // }
-
 // con()
 
 var ddd = parse(ccc);
+
+/*
+ * 查看解析之后的ast
+ */
 console.log(JSON.stringify(ddd));
 
-var env = new Environment(null);
+/*
+ * 开始构建上下文
+ */
+var env = new Environment();
 
-env.set('print', function(txt) {
+// built-in function
+env.def('print', function(txt) {
 	console.log(txt);
 });
 
+// 开始eval
 evaluate(ddd, env);
 
